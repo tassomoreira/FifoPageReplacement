@@ -68,7 +68,7 @@ int QueuePoll(Queue* myQueue) {
     return number;
 }
 
-void QueueClear(Queue* myQueue) {   
+void QueueDestroy(Queue* myQueue) {   
     Node* currentNode = myQueue->HEAD;
 
     while(currentNode != NULL) {
@@ -80,7 +80,7 @@ void QueueClear(Queue* myQueue) {
     free(myQueue);
 }
 
-void QueueReset(Queue* myQueue) {   
+void QueueClear(Queue* myQueue) {   
     Node* currentNode = myQueue->HEAD;
 
     while(currentNode != NULL) {
@@ -93,11 +93,6 @@ void QueueReset(Queue* myQueue) {
 }
 
 void QueuePrint(Queue* myQueue) {
-    if(QueueIsEmpty(myQueue)) {
-        printf("ERRO: Não é possível imprimir elementos de uma fila vazia\n");
-        exit(1);
-    }
-
     char result[100] = "[";
 
     Node* currentNode = myQueue->HEAD;

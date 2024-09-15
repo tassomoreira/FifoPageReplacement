@@ -4,12 +4,13 @@
 #include "../include/Queue.h"
 
 int fifoPageReplacement(Queue* pagesQueue, Queue* memoryQueue, int frames) {
-    QueueReset(memoryQueue);
+    QueueClear(memoryQueue);
     int pageFaults = 0;
+
+    printf(" \t[]\n");
 
     while(pagesQueue->HEAD != NULL) {
         int number = QueuePoll(pagesQueue);
-
         if(QueueSize(memoryQueue) < frames) {
 
             if(!QueueContains(memoryQueue, number)) {
@@ -25,6 +26,9 @@ int fifoPageReplacement(Queue* pagesQueue, Queue* memoryQueue, int frames) {
                 pageFaults++;
             }
         }
+
+        printf("%d\t", number); QueuePrint(memoryQueue);
+
     }
     return pageFaults;
 }
@@ -52,7 +56,7 @@ void promptMenu() {
     printf("Escolha uma opção: ");
 }
 
-void promptAddPages(Queue* myQueue) {
+void promptAddPages(Queue* pagesQueue) {
     clearScreen();
 
     int number;
@@ -65,7 +69,7 @@ void promptAddPages(Queue* myQueue) {
     while(1) {
         scanf("%d", &number);
 
-        QueueEnqueue(myQueue, number);
+        QueueEnqueue(pagesQueue, number);
 
         if(getchar() == '\n')
             break;
@@ -76,30 +80,26 @@ void promptAddPages(Queue* myQueue) {
     getchar();
 }
 
-void promptPrintPages(Queue* myQueue) {
+void promptPrintPages(Queue* pagesQueue) {
     clearScreen();
     printf("\n===============================================\n");
     printf("      ** Imprimir Sequência de Páginas **      \n");
     printf("===============================================\n");
 
-    if(!QueueIsEmpty(myQueue)) {
-        QueuePrint(myQueue);
-    } else {
-        printf("ERRO: A sequência de páginas está vazia.\n");
-
-    }
+    QueuePrint(pagesQueue);
 
     printf("\nPressione Enter para voltar ao menu...\n");
     getchar();
 }
 
-void promptExit(Queue* myQueue) {
+void promptExit(Queue* pagesQueue, Queue* memoryQueue) {
     clearScreen();
     printf("\n===============================================\n");
     printf("            ** Saindo do Aplicativo **         \n");
     printf("===============================================\n");
 
-    QueueClear(myQueue);
+    QueueDestroy(pagesQueue);
+    QueueDestroy(memoryQueue);
     exit(0);
 }
 
@@ -116,6 +116,7 @@ void promptFifoPageReplacement(Queue* pagesQueue, Queue* memoryQueue) {
 
         getchar();
 
+        printf("Página\tMemória\n");
         printf("\nTotal de falhas na página: %d\n", fifoPageReplacement(pagesQueue,memoryQueue, frames));
         printf("Estado final da memória: ");
         QueuePrint(memoryQueue);
@@ -133,7 +134,7 @@ void promptClearPages(Queue* pagesQueue) {
     printf("===============================================\n");
 
     if(!QueueIsEmpty(pagesQueue)) {
-        QueueReset(pagesQueue);
+        QueueClear(pagesQueue);
         printf("Limpeza da sequência de páginas realizada com sucesso.\n");
     } else 
         printf("ERRO: A sequência de páginas está vazia.\n");
@@ -154,7 +155,7 @@ int main() {
 
         switch(option) {
             case 0:
-                promptExit(pagesQueue);
+                promptExit(pagesQueue, memoryQueue);
                 break;
             case 1: 
                 promptAddPages(pagesQueue); 
