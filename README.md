@@ -23,3 +23,4 @@ Para limpar os arquivos gerados pela compilação, use:
 ```bash
 make clean
 ```
+Esse comando irá limpar o diretório build/ e remover todos os arquivos gerados.
