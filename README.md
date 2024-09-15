@@ -1,6 +1,6 @@
 # FifoPageReplacement
 
-Este projeto usa um `Makefile` para compilar e executar o programa em C. Siga os passos abaixo para executar o programa:
+Este projeto usa um `Makefile` para compilar e executar o programa em C. Para utilizar o Makefile, você precisará de uma ferramenta compatível com comandos Unix-like, como Git Bash, Windows Subsystem for Linux (WSL), ou um ambiente Linux nativo. Siga os passos abaixo para executar o programa:
 
 ## Compilar e Executar
 
