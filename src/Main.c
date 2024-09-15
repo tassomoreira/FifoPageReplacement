@@ -63,7 +63,7 @@ void promptAddPages(Queue* pagesQueue) {
     printf("\n==================================================\n");
     printf("        ** Adicionar Sequência de Páginas **     \n");
     printf("==================================================\n");
-    printf("Digite os números separados por Espaço.\n");
+    printf("Digite os números separados apenas por Vírgula e Espaço.\n");
     printf("Pressione Enter quando terminar:\n");
 
     while(1) {
